@@ -6,7 +6,7 @@ Repository for the scientific poster session at the University of Applied Scienc
 </head>
 
 <body>
-<form method="post" action="https://forms.un-static.com/forms/19ccb65bf3a2e4bb2d7d562a5f9fa2e721bd92fd">
+<form method="post" action="https://formspree.io/f/xwkjgbkn">
   <div class="form-group row">
     <label for="name" class="col-4 col-form-label">Name</label>
     <div class="col-8">
@@ -15,6 +15,17 @@ Repository for the scientific poster session at the University of Applied Scienc
           <i class="fa fa-user"></i>
         </div>
         <input id="name" name="name" placeholder="Please enter your name" type="text" required="required" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="email" class="col-4 col-form-label">E-mail address</label>
+    <div class="col-8">
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-envelope"></i>
+        </div>
+        <input id="email" name="email" placeholder="OPTIONAL your e-mail address" type="text" class="form-control">
       </div>
     </div>
   </div>
@@ -31,7 +42,7 @@ Repository for the scientific poster session at the University of Applied Scienc
   </div>
 </form>
 <div align="center">
-  <p><small>(Powered by <a rel="nofollow" href="Un-static Forms">Un-static Forms</a>)</small></p>
+  <p><small>(Powered by Formspree</a>)</small></p>
 </div>
 </body>
 </html>
