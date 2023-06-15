@@ -37,7 +37,7 @@ Repository for the scientific poster session at the University of Applied Scienc
   </div>
   <div class="form-group row">
     <div class="offset-4 col-8">
-      <button name="submit" type="submit" class="btn btn-primary">Send</button>
+      <button name="submit" type="submit" style="background-color:#555555" class="btn btn-primary">Send</button>
     </div>
   </div>
 </form>
