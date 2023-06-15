@@ -19,17 +19,6 @@ Repository for the scientific poster session at the University of Applied Scienc
     </div>
   </div>
   <div class="form-group row">
-    <label for="email" class="col-4 col-form-label">E-mail address</label>
-    <div class="col-8">
-      <div class="input-group">
-        <div class="input-group-addon">
-          <i class="fa fa-envelope"></i>
-        </div>
-        <input id="email" name="email" placeholder="Your e-mail address" type="text" required="required" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
     <label for="message" class="col-4 col-form-label">Message</label>
     <div class="col-8">
       <textarea id="message" name="message" cols="40" rows="10" required="required" class="form-control"></textarea>
