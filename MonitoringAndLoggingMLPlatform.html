@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>Observability in a Kubernetes based ML-Platform</title>
+
+
+
+
+
+
+
+<!--
+Font-awesome icons ie github or twitter
+-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+
+<!--
+Google fonts api stuff
+-->
+<link href='https://fonts.googleapis.com/css?family=Special Elite' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Rasa' rel='stylesheet'>
+
+<!--
+Here are the required style attributes for css to make this poster work :)
+-->
+<style>
+@page {
+size: 23.3in 33.1in;
+margin: 0;
+padding: 0;
+}
+body {
+margin: 0px;
+padding: 0px;
+width: 23.3in;
+height: 33.1in;
+text-align: justify;
+font-size: 36px;
+line-height: 1.05;
+}
+/* RMarkdown Class Styles */
+/* center align leaflet map,
+from https://stackoverflow.com/questions/52112119/center-leaflet-in-a-rmarkdown-document */
+.html-widget {
+margin: auto;
+position: sticky;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
+.leaflet.html-widget.html-widget-static-bound.leaflet-container.leaflet-touch.leaflet-fade-anim.leaflet-grab.leaflet-touch-drag.leaflet-touch-zoom {
+position: sticky;
+width: 100%;
+}
+pre.sourceCode.r {
+background-color: #dddddd40;
+border-radius: 4mm;
+padding: 4mm;
+width: 75%;
+margin: auto;
+margin-top: 1em;
+margin-bottom: 1em;
+/* align-items: center; */
+}
+code.sourceCode.r{
+background-color: transparent;
+font-size: 20pt;
+border-radius: 2mm;
+}
+code {
+font-size: 25pt;
+font-family: monospace;
+background-color: #0b454524;
+color: #6cc2b5;
+padding: 1.2mm;
+line-height: 1;
+border-radius: 2mm;
+}
+caption {
+margin-bottom: 10px;
+font-size: 20pt;
+font-style: italic;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #0b454520;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+  border-spacing: 0;
+  font-size: 40%;
+  border-style: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 1em;
+  padding-left: 1em;
+  line-height: 1em;
+}
+table {
+  margin: auto;
+}
+th {
+  padding-left: 5mm;
+  padding-right: 5mm;
+}
+.caption {
+font-size: 20pt;
+font-style: italic;
+padding-top: 0;
+}
+.references {
+font-size: 20px;
+line-height: 90%;
+}
+/* Create three unequal columns that floats next to each other */
+.column {
+float: left;
+padding: 0px;
+}
+.outer {
+width: 23.3in;
+height: calc(33.1in *  (1 - 0.2 - 0.1 - 0.01) );
+-webkit-column-count: 3; /* Chrome, Safari, Opera */
+-moz-column-count: 3; /* Firefox */
+column-count: 3;
+-webkit-column-fill: auto;
+-moz-column-fill: auto;
+column-fill: auto;
+column-gap: 0;
+padding-left: 0cm;
+padding-right: 0cm;
+/* -webkit-column-rule-width: 50%;
+-moz-column-rule-width: 50%;
+column-rule-width: 50%; */
+-webkit-column-rule-style: none;
+-moz-column-rule-style: none;
+column-rule-style: none;
+-webkit-column-rule-color: black;
+-moz-column-rule-color: black;
+column-rule-color: black;
+background-color: #ffffff;
+font-family: Rasa;
+margin-top: calc(33.1in *  0.2 );
+padding-top: 1em;
+padding-bottom: 1em;
+}
+span.citation {
+  color: #0b4545;
+  font-weight: bold;
+}
+a {
+text-decoration: none;
+color: #0b4545;
+}
+#title {
+font-size: 80pt;
+text-align: left;
+margin: 0;
+line-height: 98%;
+border-bottom: 0;
+font-weight: normal;
+background: 0;
+}
+#author {
+color: #6cc2b5;
+margin: 0;
+line-height: 85%;
+font-size: 1.17em;
+}
+#affiliation {
+padding-top: 0.1em;
+color: ;
+font-style: italic;
+font-size: 25px;
+margin: 0;
+}
+sup {
+color: #cc0000;
+}
+.affiliation sup {
+font-size: 20px;
+}
+.author {
+text-align: left;
+}
+.author sup {
+font-size: 30px;
+}
+.author_extra {
+color: #0b4545;
+margin: 0;
+line-height: 85%;
+font-size: 35px;
+text-align: left;
+}
+.outer h1, h2, h3, h4, h5, h6 {
+text-align: center;
+margin: 0;
+font-weight: bold;
+}
+.section h1 {
+  text-align:center;
+  padding-bottom:5px;
+  background:
+    linear-gradient(
+      to left,
+      #ffffff 1%,
+      #ffffff 20%,
+      #6cc2b575 33%,
+      #6cc2b5 50%,
+      #6cc2b575 66%,
+      #ffffff 80%,
+      #ffffff 99%
+    )
+    left
+    bottom
+    #ffffff
+    no-repeat;
+  background-size:100% 5px ;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.outer h2 {
+text-align: center;
+}
+.outer p, .level2 {
+color: #000000;
+}
+.outer ol {
+padding-left: 8%;
+padding-right: 8%;
+text-align: left;
+}
+.main {
+width: 23.3in;
+height: calc(33.1in * 0.2);
+position: absolute;
+background-color: #6cc2b5;
+color: #ffffff90;
+font-family: Special Elite;
+background-image: linear-gradient(#6cc2b5 50%,#0b4545);
+}
+.main strong {
+color: #ffffff;
+}
+.main strong > sup {
+color: #ffffff;
+}
+.main sup {
+color: #ffffff90;
+}
+#main-img-left {
+width: 10%;
+left: 0.5in;
+bottom: 0.2in;
+position: absolute;
+}
+#main-img-center {
+width: 10%;
+left: calc(23.3in * 0.45);
+bottom: 0.5in;
+position: absolute;
+}
+#main-img-right {
+width: 10%;
+right: 0.5in;
+bottom: 0.2in;
+position: absolute;
+}
+.main p {
+font-size: 140px;
+font-family: Special Elite;
+text-align: center;
+margin: 0;
+position: absolute;
+top: 50%;
+-ms-transform: translateY(-50%);
+transform: translateY(-50%);
+margin-left: 1em;
+}
+.fab {
+color: #00000030;
+font-size: 25px;
+}
+.twitter, i {
+color: #00000030;
+font-size: 35px;
+text-decoration: none;
+}
+a.email {
+text-decoration: none;
+color: #00000030;
+font-size: 35px;
+}
+.envelope {
+color: #00000030;
+font-size: 5px;
+text-decoration: none;
+}
+.poster_wrap {
+width: 23.3in;
+height: 33.1in;
+padding: 0cm;
+}
+.main_bottom {
+width: 23.3in;
+height: calc(33.1in * 0.1);
+margin-top: calc(33.1in * (1 - 0.1));
+position: absolute;
+background-color: #6cc2b5;
+background-image: linear-gradient(#0b4545 10%, #6cc2b5);
+}
+.section {
+  padding-left: 10mm;
+  padding-right: 10mm;
+}
+span > #tab:mytable {
+  font-weight: bold;
+}
+.orcid img {
+  width: 3%;
+}
+.emphasis {
+  background-color: #008080;
+  color: #ffffff;
+  border: solid #0b2045 3mm;
+  margin: 1em;
+  padding-left: 0;
+  padding-right: 0;
+}
+.emphasis h1 {
+  font-weight: bold;
+  background: none;
+  background-color: #0b2045;
+  padding-bottom: 5mm;
+  padding-top: 1mm;
+  margin-top: -1mm;
+  margin-right: -1mm;
+  margin-left: -1mm;
+}
+.emphasis blockquote {
+  border: 0;
+}
+.emphasis ol {
+  padding: 0;
+  padding-left: 8%;
+  font-size: 100%;
+  font-weight: bold;
+}
+.emphasis p {
+  color: #ffffff;
+}
+</style>
+</head>
+<body>
+
+
+<div class="poster_wrap">
+
+<div class="column outer">
+<div class="section">
+<h1 id="title"><strong>Observability in a Kubernetes based ML-Platform</strong></h1><br>
+<h3 id="author" class="author">
+
+<strong>Sebastian Gedigk</strong><sup> 1</sup><br>
+
+<a class='envelope'><i class="fas fa-envelope"></i></a> <a href="mailto:sebastian.gedigk@haw-hamburg.de" class="email">sebastian.gedigk@haw-hamburg.de</a> <br>
+</h3>
+
+<h5 id="author_extra", class="author_extra">
+</h5>
+
+
+<p id="affiliation" class="affiliation">
+<sup>1</sup> Department of Computer Science, University of Applied Sciences Hamburg (HAW)
+</p>
+</div>
+
+<div id="problem" class="section level1">
+<h1>Problem</h1>
+<p>The research project DaFne from the university of applied science Hamburg builds a generativ machine learning platform.
+This platform is based on Kubernetes and has a microservice architecture. For this observability is the key to successfully run this platform.
+Observability has wide range and includes for e.g. the topics monitoring, logging, tracing and measuring <span class="citation">[<a href="#ref-Goniwada.2022b">2</a>]</span>.
+The DaFne project needs observability for the platform. At this point the platform has no observability model either an observability strategy.
+So this brings on the following research question <strong>RQ: How can the DaFne platform reach observability?</strong></p>
+</div>
+<div id="input-knowledge" class="section level1">
+<h1>Input Knowledge</h1>
+<p>The platform have multiple usecases like data generation, neighbourhood generation, agent based generation of mobility data and maybe some more in the future.
+All these usecases have one in common, they use machine learning algorithms to generate and evaluate data.
+With this knowledge, we need to check the metrics of the platform and monitor the health status of the applications.
+It is equally important to log requests to the platform and output from each service.
+These informations makes it possible to detect bottlenecks and detect failures <span class="citation">[<a href="#ref-Arundel.2019">1</a>]</span>.</p>
+</div>
+<div id="research-process" class="section level1">
+<h1>Research Process</h1>
+The research process for developing an observability model/system for the DaFne platfrom contains literature review, research for related solutions and experiments.
+It is planned to build an iterativ approach for building and evaluating the observability model.
+In the end the goal is to develop a strategy for implementing the observability model.
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<img src="images/observabilityDSR.svg" alt="The Design Science Research Framework adapted from Hevner et. al.[@Hevner.2004]" width="100%" />
+<p class="caption">
+Figure 1: The Design Science Research Framework adapted from Hevner et. al.<span class="citation">[<a href="#ref-Hevner.2004">3</a>]</span>
+</p>
+</div>
+<p>The Figure 1 shows the Design Science Research and how the design will be influenced by exisiting methodologies and foundations.
+Besides that it shows how the observability strategy and model finds application for the people and organizations who use the platform.
+The evaluation via for e.g. experts or field study will refine the model and strategy <span class="citation">[<a href="#ref-vomBrocke.2020">4</a>]</span>.</p>
+</div>
+<div id="concepts" class="section level1">
+<h1>Concepts</h1>
+There will be one main concept in the research for observability in the DaFne platform named <strong>Full-stack observability</strong>.
+Full-stack observability <span class="citation">[<a href="#ref-Goniwada.2022b">2</a>]</span> is the completest package for cloud native applications. It needs to be considered in the Architecture,
+because it makes the “-ilities” seeable. Furthermore, this concept covers all individual strands such as monitoring, logging and tracing.
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="images/Full-stack%20Observability.svg" alt="Overview Full-stack observability[@Goniwada.2022b]" width="100%" />
+<p class="caption">
+Figure 2: Overview Full-stack observability<span class="citation">[<a href="#ref-Goniwada.2022b">2</a>]</span>
+</p>
+</div>
+<p>As seen in Figure 2 this approach covers the three most important parts of a system security, infrastructure and application.
+This concept is based on one source of truth. This enables the supporting option to analyse the data and metadata with ai algorithms.</p>
+</div>
+<div id="solution" class="section level1">
+<h1>Solution</h1>
+<p>The solution for the <strong>RQ</strong> is the development of an architecture model based on the concept of full-stack observability.
+This includes the use of various monitoring, logging and measurement tools that can send their data to a common data lake.
+Deciding which tools are a good fit for the platform is part of the research process and influences the architectural model.
+All data collected by the tools must be stored in a single source. This reduces the workload from the network and the services.
+It also makes it easier to access the data because it is all bundled together from where the visualization accesses the data.
+Visualization helps identify bottlenecks and makes it easier to see the big picture of the system.
+An important component is the real-time view of the system and especially of the infrastructure resources.
+This is because a lot of data is calculated on the platform using ml algorithms.
+It is useful to see whether the system’s resources are sufficient and being used fairly.
+Kubernetes offers several APIs for measuring pods, containers and services.
+A standard for logging in the services should also be defined in the course of the investigation.</p>
+</div>
+<div id="output-knowledge" class="section level1">
+<h1>Output Knowledge</h1>
+<p>The outcome of this research will be an observability model and observability strategy for the DaFne platform.
+These artifacts are evaluated by partners from the project group and adapted in several iterations.
+The evaluation will also be carried out through experiments on the prototype.
+In a further work, this research will be implemented and the results documented.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<!-- # Introduction -->
+<!-- This is the `posterdown_betterport` template for the {posterdown} package! I was inspired by the twitter thread of [Mike Morrison](https://mobile.twitter.com/mikemorrison/status/1110191245035479041) and wanted to apply the `#betterposter` concept to the reproducible (yet simple to use) functionality of the {posterdown} package [@R-posterdown]. If you're not an R user don't sweat as you do **NOT** need to use it at all! Feel free to use only the Markdown functionality of this package :) -->
+<!-- # ```{r, include=FALSE} -->
+<!-- # knitr::write_bib(c('posterdown', 'rmarkdown','pagedown'), 'packages.bib') -->
+<!-- # ``` -->
+<!-- ## Objectives -->
+<!-- 1.  Pick a template layout. -->
+<!-- 2.  Write/ create your poster content distraction free. -->
+<!-- 3.  Let posterdown do its thing! -->
+<!-- # Methods -->
+<!-- I will show here how to include poster elements that may be useful, such as an equation using mathjax: -->
+<!-- $$ -->
+<!-- E = mc^2 -->
+<!-- $$ -->
+<!-- To reference a citation you can add your `.bib` file to the working directory and name it in the YAML metadata or generate an automated one as done here, then you only need to reference the label value in the `.bib` file. For example this package is built on top of the wonderful {pagedown} package and I will cite it at the end of this sentance using this in the rmd `[@R-pagedown]` [@R-pagedown]. -->
+<!-- To get a better understanding of how to include features like these please refer to the {posterdown} [wiki](https://github.com/posterdown/wiki). -->
+<!-- ***Now on to the results!*** -->
+<!-- # Results -->
+<!-- Here you may have some figures to show off, bellow I have made a scatterplot with the infamous Iris dataset and I can even reference to the figure automatically like this, `Figure \@ref(fig:irisfigure)`, Figure \@ref(fig:irisfigure). -->
+<!-- ```{r, irisfigure, fig.cap='Here is a caption for the figure. This can be added by using the "fig.cap" option in the r code chunk options, see this [link](https://yihui.name/knitr/options/#plots) from the legend himself, [Yihui Xie](https://twitter.com/xieyihui).', out.width="80%"} -->
+<!-- par(mar=c(2,2,0,1)) -->
+<!-- plot(x = iris$Sepal.Length, y = iris$Sepal.Width, -->
+<!--      col = iris$Species, pch = 19, xlab = "Sepal Length", -->
+<!--      ylab = "Sepal Width") -->
+<!-- ``` -->
+<!-- Maybe you want to show off some of that fancy code you spent so much time on to make that figure, well you can do that too! Just use the `echo=TRUE` option in the r code chunk options, Figure \@ref(fig:myprettycode)! -->
+<!-- ```{r myprettycode, echo=TRUE, fig.cap='Boxplots, so hot right now!', fig.height=6, out.width="80%"} -->
+<!-- #trim whitespace -->
+<!-- par(mar=c(2,2,0,0)) -->
+<!-- #plot boxplots -->
+<!-- boxplot(iris$Sepal.Width~iris$Species, -->
+<!--         col = "#008080",  -->
+<!--         border = "#0b4545", -->
+<!--         ylab = "Sepal Width (cm)", -->
+<!--         xlab = "Species") -->
+<!-- ``` -->
+<!-- How about a neat table of data? See, Table \@ref(tab:iristable): -->
+<!-- ```{r, iristable} -->
+<!-- knitr::kable( -->
+<!--   iris[1:15,1:5], format = "html", -->
+<!--   caption = "A table made with the **knitr::kable** function.", -->
+<!--   align = "c", col.names = c("Sepal <br> Length", -->
+<!--                              "Sepal <br> Width", -->
+<!--                              "Petal <br> Length", -->
+<!--                              "Petal <br> Width", -->
+<!--                              "Species"), -->
+<!--   escape = FALSE) -->
+<!-- ``` -->
+<!-- # References -->
+<div id="refs" class="references csl-bib-body">
+<div id="ref-Arundel.2019" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Arundel, J., Domingus, J.: Cloud native DevOps mit kubernetes: Bauen, deployen und skalieren moderner anwendungen in der cloud. dpunkt.verlag, Heidelberg (2019).</div>
+</div>
+<div id="ref-Goniwada.2022b" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Goniwada, S.R.: Observability. In: Goniwada, S.R. (ed.) Cloud native architecture and design. pp. 661–676 Apress, Berkeley, CA (2022). https://doi.org/<a href="https://doi.org/10.1007/978-1-4842-7226-8{\textunderscore }19">10.1007/978-1-4842-7226-8{\textunderscore }19</a>.</div>
+</div>
+<div id="ref-Hevner.2004" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Hevner et al.: Design science in information systems research. MIS Quarterly. 28, 1, 75 (2004). https://doi.org/<a href="https://doi.org/10.2307/25148625">10.2307/25148625</a>.</div>
+</div>
+<div id="ref-vomBrocke.2020" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">vom Brocke, J. et al. eds: Design science research: cases. Springer, Cham, Switzerland (2020).</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="main">
+<p>An <strong>Observability</strong> System <strong>for</strong> the <strong>DaFne</strong> Platform</p>
+</div>
+<div class="main_bottom">
+<img id="main-img-left" src=images/combined_dafne_haw.svg>
+<img id="main-img-center" src=images/qr-code.svg>
+<img id="main-img-right" src=images/hitec_logo_white.png>
+</div>
+</div>
+
+
+
+</body>
+</html>
