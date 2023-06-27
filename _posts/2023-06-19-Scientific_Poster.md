@@ -10,4 +10,4 @@ description: This is the poster for the module FW 2
 ... which is shown in the screenshot below:
 ![My Design Science Research for Observability](https://github.com/Garry1704/dafne_observability/blob/main/_posts/observabilityDSR.jpg)
 
-Go back to [Homepage]({{ site.url }}/) 
+Go back to [Homepage](https://garry1704.github.io/dafne_observability/) 
