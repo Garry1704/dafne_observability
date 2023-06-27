@@ -8,7 +8,8 @@ The .pdf to download is [here](./FW2_Poster_Gedigk.pdf).
 
 On [this](./_posts/2023-06-19-Scientific_Poster.md) page you can see just the pictures from the poster in detail.
 
-I´m Sebastian Gedigk if you like to contact me send me an e-mail to  sebastian.gedigk@haw-hambug.de or use this Form:
+I´m Sebastian Gedigk if you like to contact me send me an e-mail to  
+[sebastian.gedigk@haw-hambug.de](sebastian.gedigk@haw-hambug.de) or use this Form:
 <html>
 <head>
   <title>Contact me</title>
