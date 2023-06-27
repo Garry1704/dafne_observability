@@ -2,14 +2,12 @@
 layout: default
 ---
 
-You can find my poster [here](./MonitoringAndLoggingMLPlatform.html).
+You can find my poster [here](./MonitoringAndLoggingMLPlatform.html) or download the .pdf from [here](./FW2_Poster_Gedigk.pdf).
 
-The .pdf to download is [here](./FW2_Poster_Gedigk.pdf).
-
-On [this](./_posts/2023-06-19-Pictures_from_Poster.md) page you can see just the pictures from the poster in detail.
+On [this](./_posts/2023-06-19-Posterpictures.md) page you can see just the pictures from the poster in detail.
 
 I´m Sebastian Gedigk if you like to contact me send me an e-mail to  
-[sebastian.gedigk@haw-hambug.de] or use this Form:
+sebastian.gedigk@haw-hambug.de or use this Form:
 <html>
 <head>
   <title>Contact me</title>
