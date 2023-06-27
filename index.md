@@ -54,3 +54,11 @@ sebastian.gedigk@haw-hambug.de or use this Form:
 </div>
 </body>
 </html>
+
+
+# The images from the poster separated
+Overview Full stack Observability
+![Overview Full stack Observability](./assets/images/Full-stack-Observability.jpg)
+
+My Design Science Research for Observability
+![My Design Science Research for Observability](./assets/images/observabilityDSR.jpg)
