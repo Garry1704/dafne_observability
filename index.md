@@ -4,10 +4,12 @@ layout: default
 
 You can find my poster [here](./MonitoringAndLoggingMLPlatform.html) or download the .pdf from [here](./FW2_Poster_Gedigk.pdf).
 
-On [this](./_posts/2023-06-19-Posterpictures.md) page you can see just the pictures from the poster in detail.
+[Click here to go down to the separated images from the poster](#the-images-from-the-poster-separated)
 
 I´m Sebastian Gedigk if you like to contact me send me an e-mail to  
 sebastian.gedigk@haw-hambug.de or use this Form:
+<details><summary><a>Click here for Contact Me</a></summary>
+
 <html>
 <head>
   <title>Contact me</title>
@@ -54,11 +56,17 @@ sebastian.gedigk@haw-hambug.de or use this Form:
 </div>
 </body>
 </html>
-
+</details>
 
 # The images from the poster separated
+
 Overview Full stack Observability
+
 ![Overview Full stack Observability](./assets/images/Full-stack-Observability.jpg)
 
+
+
 My Design Science Research for Observability
+
 ![My Design Science Research for Observability](./assets/images/observabilityDSR.jpg)
+
